@@ -5,9 +5,11 @@ A Rails Billing Service
 
 Create a simple Rails billing service that is interacted with through JSON APIs to be able to handle virtually any billing situation.
 
+Data models and API calls should all provide monitorable and validatable data sources to (ideally) ensure that errors are not happening and (if they do happen) as much data as possible to quickly identify and solve bugs.
+
 Avoid complicated design patterns to increase readability and understandability while following (largely) standard Ruby on Rails conventions:
 - Service classes for re-useable units of business logic
-    - Author's note: IMO, this is a missing concept in base Rails that would significantly decrease complexity of Rails apps
+    - Author's note: IMO, this is a missing concept in base Rails that would decrease complexity of Rails apps
 - Sidekiq for asynchronous processing (?)
     - Author's note: for simplicity, it's probably worth looking into the newer Rails async processing paradigms, but Sidekiq has been rock solid
 - No engines
@@ -76,3 +78,10 @@ Entity 1 should be you (your company) who is receiving money from customers or p
 - An Entity HAS MANY Invoices
 - An Entity HAS MANY Payor Transactions
 - An Entity HAS MANY Payee Transactions
+
+### Log
+Logs are not directly a billing object, but there should be a Log for each action (API call received, asynchronous job called, Service class called, etc.) performed by rubilling to be able to view a history of each call to allow us to validate that each call is performed properly and identify when and where issues occurred.
+
+Please note that these logs are not intended to replace monitoring calls like Datadog or other services, but are designed to provide direct links to models as necessary, store API call parameters, and (potentially) provide a queryable call stack all to aid debugging by reconstructing calls and provide another validation source.
+
+Every call to an API endpoint, Service class, or other unit of logic should create a Log object with a reference to the parent Log (if applicable, calls to API endpoints and periodic asynchronous jobs will likely not have this), the name of the class that is currently being called, parameters, and a status field that gets updated as desired.
