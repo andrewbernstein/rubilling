@@ -1,6 +1,6 @@
 class CreateAdjustments < ActiveRecord::Migration[8.1]
   def change
-    create_table :adjustments do |t|
+    create_table :adjustments, id: false do |t|
       t.bigint :id
       t.bigint :invoice_id
       t.bigint :line_item_id # technically not necessary, but could be very helpful
