@@ -60,7 +60,7 @@ This is an internal representation of a payment received from a payor Entity (th
 - A Transaction HAS MANY Applied Transactions
 - A Transaction HAS MANY Invoices THROUGH Applied Transactions
 - A Transaction HAS MANY Adjustments THROUGH Applied Transactions
-- A Transaction HAS ONE Payor Entity
+- A Transaction HAS ONE Payor Entity THROUGH Payment Methods
 - A Transaction HAS ONE Payee Entity
 - A Transaction HAS ONE Payment Method
 
