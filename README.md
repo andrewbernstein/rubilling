@@ -34,18 +34,21 @@ Analogous to the bill you receive at a restaraunt.
     - In the Restaraunt analogy, this is the Restaraunt
 
 ### Line Items
-Analogous to an individual item on the bill you receive at a restaraunt.
+Analogous to an individual item on the bill you receive at a restaraunt. The `amount_in_cents` of the Line Item's `BASE_PRICE` Adjustment is determined by its Variant's `amount_in_cents` multiplied by the Line Item's Quantity.
 
 - A Line Item BELONGS TO an Invoice
 - A Line Item HAS MANY Adjustments
+- A Line Item HAS ONE Variant
 
 ### Adjustments
 A breakdown of the billing parts of each individual line item on an invoice, there isn't a great simple analogy.
 
 - An Adjustment BELONGS TO an Invoice
 - An Adjustment BELONGS TO a Line Item
+- An Adjustment BELONGS TO a Variant THROUGH Line Items
+    - Author's note: most Adjustments won't belong to a Variant, but BASE Adjustments will
 - An Adjustment BELONGS TO an Applied Transaction
-    - Author's note: most Adjustments won't belong to an Applied Transaction, but payment Adjustments will
+    - Author's note: most Adjustments won't belong to an Applied Transaction, but PAYMENT Adjustments will
 - An Adjustment BELONGS TO a Trasaction THROUGH an Applied Transaction
     - Author's note: similar to Applied Transactions, most adjustments won't belong to a Transaction
 
@@ -59,6 +62,7 @@ This is an internal representation of a payment received from a payor Entity (th
 - A Transaction HAS MANY Adjustments THROUGH Applied Transactions
 - A Transaction HAS ONE Payor Entity
 - A Transaction HAS ONE Payee Entity
+- A Transaction HAS ONE Payment Method
 
 ### Applied Transactions
 The link between a Transaction and an Invoice that lets you partially pay an Invoice, or (potentialy) pay multiple Invoices with a single Transaction. 
@@ -69,6 +73,7 @@ Under the hood, this is functionally a join table between Invoices and Transacti
 
 - An Applied Transaction BELONGS TO an Invoice
 - An Applied Transaction BELONGS TO a Transaction
+- An Applied Transaction BELONGS TO a Payment Method THROUGH its Transaction
 
 ### Entity
 You, a customer of your business, or a vendor that you need to pay.
@@ -76,8 +81,22 @@ You, a customer of your business, or a vendor that you need to pay.
 Entity 1 should be you (your company) who is receiving money from customers or paying out to vendors.
 
 - An Entity HAS MANY Invoices
-- An Entity HAS MANY Payor Transactions
+- An Entity HAS MANY Payor Transactions THROUGH Transactions
 - An Entity HAS MANY Payee Transactions
+- An Entity HAS MANY Payment Methods
+
+### Product
+An the product being billed for. Analogous to a type of item on the menu that has variations, like a hamburger
+
+- A Product HAS MANY Variants
+
+### Variant
+The individual type of product that is billed for. Analogous to a veggie burger vs. a regular burger. The variant has the base price (`amount_in_cents`) of the line item.
+
+- A Variant BELONGS TO a Product
+
+### Payment Method
+The method an entity uses to pay for 
 
 ### Log
 Logs are not directly a billing object, but there should be a Log for each action (API call received, asynchronous job called, Service class called, etc.) performed by rubilling to be able to view a history of each call to allow us to validate that each call is performed properly and identify when and where issues occurred.
