@@ -11,5 +11,5 @@
 #
 class AppliedTransaction < ApplicationRecord
   belongs_to :invoice
-  belongs_to :payment_transaction, class_name: 'Transaction', foreign_key: :transaction_id
+  belongs_to :payment_transaction, class_name: "Transaction", foreign_key: :transaction_id
 end

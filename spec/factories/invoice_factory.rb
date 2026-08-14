@@ -12,7 +12,7 @@
 #
 FactoryBot.define do
   factory :invoice do
-    shortcode { 'ASDF1234' }
+    shortcode { "ASDF1234" }
     payee
   end
 end

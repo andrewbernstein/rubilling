@@ -15,6 +15,6 @@ class Invoice < ApplicationRecord
   has_many :adjustments
   has_many :applied_transactions
   has_many :transactions, through: :applied_transactions
-  
-  belongs_to :payee, class_name: 'Entity', foreign_key: :payee_id
+
+  belongs_to :payee, class_name: "Entity", foreign_key: :payee_id
 end

@@ -1,6 +1,6 @@
 class CreateInvoiceService
   prepend ServiceMonitoring
-  
+
   def initialize(payee:, external_id: nil, parent_invoice: nil)
     @payee = payee
     @external_id = external_id
