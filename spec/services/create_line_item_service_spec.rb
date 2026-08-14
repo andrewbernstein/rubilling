@@ -25,7 +25,7 @@ describe CreateLineItemService do
 
     context "log creation" do
       let(:base_line_item_service_dummy) { double }
-      
+
       before do
         allow(CreateBaseAdjustmentService).to receive(:new).and_return(base_line_item_service_dummy)
         allow(base_line_item_service_dummy).to receive(:call)
@@ -40,6 +40,5 @@ describe CreateLineItemService do
       end
     end
 
-    
   end
 end
