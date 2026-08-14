@@ -39,6 +39,5 @@ describe CreateLineItemService do
         expect(log.status).to eq('successful')
       end
     end
-
   end
 end
