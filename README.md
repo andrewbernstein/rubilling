@@ -18,6 +18,8 @@ Avoid complicated design patterns to increase readability and understandability 
     - Author's note: I like the relative power and simplicity of RSpec
 - No AI-generated pull requests or code
     - Author's note: this isn't intended to be a knee-jerk "AI IS BAD" hot take, but there are a lot of unresolved IP ownership issues and cost/effectiveness issues and I don't want to handle that right now
+- Don't use `attr_accessor` over `@` unless you need to access class values from outside of that class
+    - Author's note: `@` is fewer keystrokes than `attr_accessor` and is clear that it's an instance value over being a local variable or method
 
 ## Data Structures
 

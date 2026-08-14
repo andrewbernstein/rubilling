@@ -1,3 +1,5 @@
+require "rails_helper"
+
 # == Schema Information
 #
 # Table name: products
@@ -7,6 +9,8 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-class Product < ApplicationRecord
-  has_many :variants
+class ProductTest < ActiveSupport::TestCase
+  # test "the truth" do
+  #   assert true
+  # end
 end

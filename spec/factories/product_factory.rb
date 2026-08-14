@@ -7,6 +7,8 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-class Product < ApplicationRecord
-  has_many :variants
+FactoryBot.define do
+  factory :product do
+    name { "test product" }
+  end
 end

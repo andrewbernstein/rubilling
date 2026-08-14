@@ -1,3 +1,5 @@
+require "rails_helper"
+
 # == Schema Information
 #
 # Table name: invoices
@@ -10,11 +12,8 @@
 #  parent_invoice_id :bigint
 #  payee_id          :bigint
 #
-class Invoice < ApplicationRecord
-  has_many :line_items
-  has_many :adjustments
-  has_many :applied_transactions
-  has_many :transactions, through: :applied_transactions
-  
-  belongs_to :payee, class_name: 'Entity', foreign_key: :payee_id
+class InvoiceTest < ActiveSupport::TestCase
+  # test "the truth" do
+  #   assert true
+  # end
 end

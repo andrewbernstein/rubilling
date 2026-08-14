@@ -1,3 +1,5 @@
+require "rails_helper"
+
 # == Schema Information
 #
 # Table name: variants
@@ -9,6 +11,8 @@
 #  updated_at      :datetime         not null
 #  product_id      :bigint
 #
-class Variant < ApplicationRecord
-  belongs_to :product
+class VariantTest < ActiveSupport::TestCase
+  # test "the truth" do
+  #   assert true
+  # end
 end

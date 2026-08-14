@@ -1,7 +1,6 @@
 class CreateEntities < ActiveRecord::Migration[8.1]
   def change
-    create_table :entities, id: false do |t|
-      t.bigint :id
+    create_table :entities do |t|
       t.string :name
       t.string :external_id
       t.timestamps

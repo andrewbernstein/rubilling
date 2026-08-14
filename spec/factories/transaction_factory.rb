@@ -8,6 +8,8 @@
 #  updated_at        :datetime         not null
 #  payment_method_id :bigint
 #
-class Transaction < ApplicationRecord
-  belongs_to :payment_method
+FactoryBot.define do
+  factory :transaction do
+    
+  end
 end

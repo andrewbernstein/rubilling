@@ -1,3 +1,5 @@
+require "rails_helper"
+
 # == Schema Information
 #
 # Table name: line_items
@@ -9,9 +11,8 @@
 #  invoice_id :bigint
 #  variant_id :bigint
 #
-class LineItem < ApplicationRecord
-  belongs_to :invoice
-  belongs_to :variant
-
-  has_many :adjustments
+class LineItemTest < ActiveSupport::TestCase
+  # test "the truth" do
+  #   assert true
+  # end
 end

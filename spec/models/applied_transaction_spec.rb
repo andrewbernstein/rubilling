@@ -1,3 +1,5 @@
+require "rails_helper"
+
 # == Schema Information
 #
 # Table name: applied_transactions
@@ -9,7 +11,8 @@
 #  invoice_id      :bigint
 #  transaction_id  :bigint
 #
-class AppliedTransaction < ApplicationRecord
-  belongs_to :invoice
-  belongs_to :payment_transaction, class_name: 'Transaction', foreign_key: :transaction_id
+class AppliedTransactionTest < ActiveSupport::TestCase
+  # test "the truth" do
+  #   assert true
+  # end
 end

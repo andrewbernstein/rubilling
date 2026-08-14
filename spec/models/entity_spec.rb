@@ -1,3 +1,5 @@
+require "rails_helper"
+
 # == Schema Information
 #
 # Table name: entities
@@ -8,9 +10,8 @@
 #  updated_at  :datetime         not null
 #  external_id :string
 #
-class Entity < ApplicationRecord
-  has_many :invoices, as: :payee, foreign_key: 'payee_id'
-  has_many :transactions, as: :payee
-  has_many :transactions, as: :payor
-  has_many :payment_methods
+class EntityTest < ActiveSupport::TestCase
+  # test "the truth" do
+  #   assert true
+  # end
 end

@@ -9,9 +9,8 @@
 #  invoice_id :bigint
 #  variant_id :bigint
 #
-class LineItem < ApplicationRecord
-  belongs_to :invoice
-  belongs_to :variant
-
-  has_many :adjustments
+FactoryBot.define do
+  factory :line_item do
+    
+  end
 end

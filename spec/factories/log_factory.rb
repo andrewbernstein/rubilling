@@ -12,5 +12,8 @@
 #  updated_at    :datetime         not null
 #  parent_log_id :bigint
 #
-class Log < ApplicationRecord
+FactoryBot.define do
+  factory :log do
+    
+  end
 end

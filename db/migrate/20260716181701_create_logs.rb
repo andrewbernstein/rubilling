@@ -1,7 +1,6 @@
 class CreateLogs < ActiveRecord::Migration[8.1]
   def change
-    create_table :logs, id: false do |t|
-      t.bigint :id
+    create_table :logs do |t|
       t.bigint :parent_log_id
       t.string :action
       t.string :status

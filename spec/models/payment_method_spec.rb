@@ -1,3 +1,5 @@
+require "rails_helper"
+
 # == Schema Information
 #
 # Table name: payment_methods
@@ -8,5 +10,8 @@
 #  updated_at        :datetime         not null
 #  entity_id         :bigint
 #
-class PaymentMethod < ApplicationRecord
+class PaymentMethodTest < ActiveSupport::TestCase
+  # test "the truth" do
+  #   assert true
+  # end
 end

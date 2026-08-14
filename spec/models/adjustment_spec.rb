@@ -1,3 +1,5 @@
+require "rails_helper"
+
 # == Schema Information
 #
 # Table name: adjustments
@@ -11,8 +13,8 @@
 #  invoice_id             :bigint
 #  line_item_id           :bigint
 #
-class Adjustment < ApplicationRecord
-  belongs_to :invoice
-  belongs_to :line_item
-  belongs_to :applied_transaction_id
+class AdjustmentTest < ActiveSupport::TestCase
+  # test "the truth" do
+  #   assert true
+  # end
 end

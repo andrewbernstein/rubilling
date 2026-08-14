@@ -9,6 +9,10 @@
 #  updated_at      :datetime         not null
 #  product_id      :bigint
 #
-class Variant < ApplicationRecord
-  belongs_to :product
+FactoryBot.define do
+  factory :variant do
+    product
+    name { "blue test product" }
+    amount_in_cents { 1000 }
+  end
 end

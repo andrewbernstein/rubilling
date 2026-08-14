@@ -1,3 +1,5 @@
+require "rails_helper"
+
 # == Schema Information
 #
 # Table name: logs
@@ -12,5 +14,8 @@
 #  updated_at    :datetime         not null
 #  parent_log_id :bigint
 #
-class Log < ApplicationRecord
+class LogTest < ActiveSupport::TestCase
+  # test "the truth" do
+  #   assert true
+  # end
 end

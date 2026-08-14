@@ -1,13 +1,15 @@
 # == Schema Information
 #
-# Table name: transactions
+# Table name: payment_methods
 #
 #  id                :bigint           not null, primary key
-#  amount_in_cents   :integer
+#  payment_processor :string
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
-#  payment_method_id :bigint
+#  entity_id         :bigint
 #
-class Transaction < ApplicationRecord
-  belongs_to :payment_method
+FactoryBot.define do
+  factory :payment_method do
+    
+  end
 end
