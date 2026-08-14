@@ -9,7 +9,7 @@
 #  external_id :string
 #
 FactoryBot.define do
-  factory :entity, aliases: [:payee, :payor] do
+  factory :entity, aliases: [ :payee, :payor ] do
     name { "John Smith" }
     external_id { "123456" }
   end

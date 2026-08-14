@@ -11,6 +11,6 @@
 #
 FactoryBot.define do
   factory :applied_transaction do
-    
+
   end
 end
