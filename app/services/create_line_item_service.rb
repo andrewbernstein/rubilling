@@ -9,7 +9,7 @@ class CreateLineItemService
 
   def call
     line_item = nil
-    
+
     # we don't want line items without base adjustments if possible, so we're wrapping this in a transaction
     LineItem.transaction do
       line_item = LineItem.new(
