@@ -3,8 +3,8 @@
 # Table name: adjustments
 #
 #  id                     :bigint           not null, primary key
+#  adjustment_type        :string
 #  amount_in_cents        :integer
-#  type                   :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  applied_transaction_id :bigint

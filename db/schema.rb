@@ -15,12 +15,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_17_023159) do
   enable_extension "pg_catalog.plpgsql"
 
   create_table "adjustments", force: :cascade do |t|
+    t.string "adjustment_type"
     t.integer "amount_in_cents"
     t.bigint "applied_transaction_id"
     t.datetime "created_at", null: false
     t.bigint "invoice_id"
     t.bigint "line_item_id"
-    t.string "type"
     t.datetime "updated_at", null: false
   end
 

@@ -11,5 +11,8 @@
 #
 FactoryBot.define do
   factory :line_item do
+    invoice
+    variant
+    quantity { 1 }
   end
 end

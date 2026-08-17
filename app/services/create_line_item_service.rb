@@ -8,17 +8,22 @@ class CreateLineItemService
   end
 
   def call
+    line_item = nil
+    
     # we don't want line items without base adjustments if possible, so we're wrapping this in a transaction
     LineItem.transaction do
       line_item = LineItem.new(
         invoice: @invoice,
         variant: @variant,
         quantity: @quantity
-      ).save!
+      )
+      line_item.save!
 
       CreateBaseAdjustmentService.new(
         line_item: line_item
       ).call
     end
+
+    line_item
   end
 end

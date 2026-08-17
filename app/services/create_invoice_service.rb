@@ -8,10 +8,13 @@ class CreateInvoiceService
   end
 
   def call
-    Invoice.new(
+    invoice = Invoice.new(
       payee: @payee,
       external_id: external_id,
       parent_invoice: parent_invoice
-    ).save!
+    )
+    invoice.save!
+
+    invoice
   end
 end
