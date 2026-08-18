@@ -45,4 +45,17 @@ class Invoice < ApplicationRecord
       break unless Invoice.exists?(shortcode: self.shortcode)
     end
   end
+
+  def total
+    adjustments.sum(:amount_in_cents)
+  end
+
+  def paid?
+    total == 0
+  end
+
+  # you shouldn't be able to do this, but just in case...
+  def overpaid?
+    total < 0
+  end
 end

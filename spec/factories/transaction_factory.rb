@@ -9,6 +9,7 @@
 #  payment_method_id :bigint
 #
 FactoryBot.define do
-  factory :transaction do
+  factory :transaction, aliases: [ :payment_transaction ] do
+    payment_method
   end
 end

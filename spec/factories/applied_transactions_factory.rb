@@ -11,5 +11,7 @@
 #
 FactoryBot.define do
   factory :applied_transaction do
+    payment_transaction
+    invoice
   end
 end
