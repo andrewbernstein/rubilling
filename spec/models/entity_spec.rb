@@ -10,8 +10,6 @@ require "rails_helper"
 #  updated_at  :datetime         not null
 #  external_id :string
 #
-class EntityTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+describe Entity do
+
 end

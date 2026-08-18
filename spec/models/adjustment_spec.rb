@@ -13,8 +13,6 @@ require "rails_helper"
 #  invoice_id             :bigint
 #  line_item_id           :bigint
 #
-class AdjustmentTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+describe Adjustment do
+
 end

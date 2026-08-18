@@ -11,8 +11,6 @@ require "rails_helper"
 #  invoice_id      :bigint
 #  transaction_id  :bigint
 #
-class AppliedTransactionTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+describe AppliedTransaction do
+
 end

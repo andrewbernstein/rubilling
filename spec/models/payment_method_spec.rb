@@ -10,8 +10,6 @@ require "rails_helper"
 #  updated_at        :datetime         not null
 #  entity_id         :bigint
 #
-class PaymentMethodTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+describe PaymentMethod do
+
 end

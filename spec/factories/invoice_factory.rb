@@ -10,6 +10,10 @@
 #  parent_invoice_id :bigint
 #  payee_id          :bigint
 #
+# Indexes
+#
+#  index_invoices_on_shortcode  (shortcode) UNIQUE
+#
 FactoryBot.define do
   factory :invoice do
     shortcode { "ASDF1234" }

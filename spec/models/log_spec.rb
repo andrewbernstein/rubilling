@@ -14,8 +14,6 @@ require "rails_helper"
 #  updated_at    :datetime         not null
 #  parent_log_id :bigint
 #
-class LogTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+describe Log do
+
 end

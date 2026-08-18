@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_17_023159) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_18_030032) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -46,6 +46,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_17_023159) do
     t.bigint "payee_id"
     t.string "shortcode"
     t.datetime "updated_at", null: false
+    t.index ["shortcode"], name: "index_invoices_on_shortcode", unique: true
   end
 
   create_table "line_items", force: :cascade do |t|

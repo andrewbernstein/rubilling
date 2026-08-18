@@ -9,8 +9,5 @@ require "rails_helper"
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-class ProductTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+describe Product do
 end

@@ -11,8 +11,6 @@ require "rails_helper"
 #  updated_at      :datetime         not null
 #  product_id      :bigint
 #
-class VariantTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+describe Variant do
+
 end

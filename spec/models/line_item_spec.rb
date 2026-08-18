@@ -11,8 +11,6 @@ require "rails_helper"
 #  invoice_id :bigint
 #  variant_id :bigint
 #
-class LineItemTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+describe LineItem do
+
 end

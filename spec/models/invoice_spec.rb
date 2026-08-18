@@ -12,8 +12,22 @@ require "rails_helper"
 #  parent_invoice_id :bigint
 #  payee_id          :bigint
 #
-class InvoiceTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+# Indexes
+#
+#  index_invoices_on_shortcode  (shortcode) UNIQUE
+#
+describe Invoice do
+  describe "#generate_shortcode" do
+    context "shortcode invalid characters" do
+      ["b", "g", "l", "o"].each do |char|
+        it "does not contain #{char}" do
+          10.times do
+            invoice = Invoice.new
+            invoice.save!
+            expect(invoice.shortcode.index(char)).to be_nil
+          end
+        end
+      end
+    end
+  end
 end
