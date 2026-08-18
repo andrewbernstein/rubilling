@@ -1,4 +1,4 @@
-class CreateBaseAdjustmentService
+class Adjustments::CreateBaseAdjustmentService
   prepend ServiceMonitoring
 
   def initialize(line_item:)

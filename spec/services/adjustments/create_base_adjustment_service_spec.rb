@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe CreateBaseAdjustmentService do
+describe Adjustments::CreateBaseAdjustmentService do
   describe "#call" do
     let(:line_item) { FactoryBot.create(:line_item) }
 
@@ -25,7 +25,7 @@ describe CreateBaseAdjustmentService do
         result
         expect(Log.count).to eq(1)
         log = Log.first
-        expect(log.action).to eq('CreateBaseAdjustmentService')
+        expect(log.action).to eq('Adjustments::CreateBaseAdjustmentService')
         expect(log.status).to eq('successful')
       end
     end

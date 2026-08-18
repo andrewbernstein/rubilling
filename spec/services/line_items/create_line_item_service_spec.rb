@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe CreateLineItemService do
+describe LineItems::CreateLineItemService do
   describe "#call" do
     let(:invoice) { FactoryBot.create(:invoice) }
     let(:variant) { FactoryBot.create(:variant) }
@@ -27,7 +27,7 @@ describe CreateLineItemService do
       let(:base_line_item_service_dummy) { double }
 
       before do
-        allow(CreateBaseAdjustmentService).to receive(:new).and_return(base_line_item_service_dummy)
+        allow(Adjustments::CreateBaseAdjustmentService).to receive(:new).and_return(base_line_item_service_dummy)
         allow(base_line_item_service_dummy).to receive(:call)
       end
 
@@ -35,7 +35,7 @@ describe CreateLineItemService do
         result
         expect(Log.count).to eq(1)
         log = Log.first
-        expect(log.action).to eq('CreateLineItemService')
+        expect(log.action).to eq('LineItems::CreateLineItemService')
         expect(log.status).to eq('successful')
       end
     end

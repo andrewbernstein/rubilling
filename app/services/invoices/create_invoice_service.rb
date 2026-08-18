@@ -1,4 +1,4 @@
-class CreateInvoiceService
+class Invoices::CreateInvoiceService
   prepend ServiceMonitoring
 
   def initialize(payee:, external_id: nil, parent_invoice: nil)

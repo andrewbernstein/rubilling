@@ -1,4 +1,4 @@
-class CreateLineItemService
+class LineItems::CreateLineItemService
   prepend ServiceMonitoring
 
   def initialize(invoice:, variant:, quantity:)
@@ -19,7 +19,7 @@ class CreateLineItemService
       )
       line_item.save!
 
-      CreateBaseAdjustmentService.new(
+      Adjustments::CreateBaseAdjustmentService.new(
         line_item: line_item
       ).call
     end
