@@ -1,7 +1,7 @@
 class Invoices::CreateInvoiceService
   prepend ServiceMonitoring
 
-  def initialize(payee:, external_id: nil, parent_invoice: nil)
+  def initialize(payee: nil, external_id: nil, parent_invoice: nil)
     @payee = payee
     @external_id = external_id
     @parent_invoice = parent_invoice
@@ -10,8 +10,8 @@ class Invoices::CreateInvoiceService
   def call
     invoice = Invoice.new(
       payee: @payee,
-      external_id: external_id,
-      parent_invoice: parent_invoice
+      external_id: @external_id,
+      parent_invoice: @parent_invoice
     )
     invoice.save!
 

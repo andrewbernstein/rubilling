@@ -29,6 +29,7 @@ class Invoice < ApplicationRecord
   has_many :transactions, through: :applied_transactions
 
   belongs_to :payee, class_name: "Entity", foreign_key: :payee_id, optional: true
+  belongs_to :parent_invoice, class_name: "Invoice", foreign_key: :parent_invoice_id, optional: true
 
   validates :shortcode, uniqueness: true
 

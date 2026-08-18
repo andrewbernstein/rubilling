@@ -11,8 +11,6 @@ module ServiceMonitoring
   end
 
   def pre_call_monitoring
-    puts "Attempting call to #{self.class}"
-
     @log_for_action = Log.new(
       action: self.class.to_s,
       parameters: {
@@ -26,8 +24,6 @@ module ServiceMonitoring
   end
 
   def post_call_monitoring
-    puts "Call to #{self.class} successful"
-
     @log_for_action.status = "successful"
     @log_for_action.save!
 
