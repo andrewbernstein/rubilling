@@ -19,7 +19,7 @@ require "rails_helper"
 describe Invoice do
   describe "#generate_shortcode" do
     context "shortcode invalid characters" do
-      ["b", "g", "l", "o"].each do |char|
+      [ "b", "g", "l", "o" ].each do |char|
         it "does not contain #{char}" do
           10.times do
             invoice = Invoice.new

@@ -12,5 +12,4 @@ require "rails_helper"
 #  variant_id :bigint
 #
 describe LineItem do
-
 end

@@ -11,5 +11,4 @@ require "rails_helper"
 #  payment_method_id :bigint
 #
 describe Transaction do
-
 end

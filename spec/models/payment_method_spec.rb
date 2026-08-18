@@ -11,5 +11,4 @@ require "rails_helper"
 #  entity_id         :bigint
 #
 describe PaymentMethod do
-
 end

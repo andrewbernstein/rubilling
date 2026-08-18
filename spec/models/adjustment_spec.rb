@@ -14,5 +14,4 @@ require "rails_helper"
 #  line_item_id           :bigint
 #
 describe Adjustment do
-
 end

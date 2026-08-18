@@ -11,5 +11,4 @@ require "rails_helper"
 #  external_id :string
 #
 describe Entity do
-
 end

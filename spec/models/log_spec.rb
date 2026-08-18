@@ -15,5 +15,4 @@ require "rails_helper"
 #  parent_log_id :bigint
 #
 describe Log do
-
 end

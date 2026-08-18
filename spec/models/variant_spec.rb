@@ -12,5 +12,4 @@ require "rails_helper"
 #  product_id      :bigint
 #
 describe Variant do
-
 end

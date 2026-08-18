@@ -12,5 +12,4 @@ require "rails_helper"
 #  transaction_id  :bigint
 #
 describe AppliedTransaction do
-
 end
