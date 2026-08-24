@@ -14,5 +14,11 @@ FactoryBot.define do
     invoice
     variant
     quantity { 1 }
+
+    trait :with_base_adjustment do
+      after(:create) do |instance|
+        create(:base_adjustment, line_item: instance)
+      end
+    end
   end
 end
