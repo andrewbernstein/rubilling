@@ -14,4 +14,11 @@ class LineItem < ApplicationRecord
   belongs_to :variant
 
   has_many :adjustments
+
+  # each line item should only have a single base adjustment!
+  # if you ever find yourself wanting more than one base adjustment,
+  # you probably want more than one line instead!
+  def base_adjustment
+    adjustments.where(adjustment_type: Adjustment::BASE_TYPE).first
+  end
 end

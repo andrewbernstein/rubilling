@@ -1,4 +1,6 @@
-class Adjustments::CreateTaxAdjustmentsService
+class Tax::CreateTaxAdjustmentsService
+  prepend ServiceMonitoring
+
   # everything in this file is subject to change dependent on integration with at least one external tax service
   def initialize(adjustment_info:)
     # adjustment_info should be an array of hashes

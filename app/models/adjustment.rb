@@ -15,6 +15,7 @@ class Adjustment < ApplicationRecord
   BASE_TYPE = "base"
   CREDIT_TYPE = "credit"
   DISCOUNT_TYPE = "discount"
+  FEE_TYPE = "fee"
   PAYMENT_TYPE = "payment"
   PAYOUT_TYPE = "payout"
   REFUND_TYPE = "refund"

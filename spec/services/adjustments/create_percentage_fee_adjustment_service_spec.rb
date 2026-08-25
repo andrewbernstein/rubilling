@@ -1,11 +1,11 @@
 require "rails_helper"
 
-describe Adjustments::CreateTaxAdjustmentService do
+describe Adjustments::CreatePercentageFeeAdjustmentService do
   describe "#call" do
     let(:invoice) { create(:invoice) }
     let(:line_item) { create(:line_item, :with_base_adjustment, invoice: invoice) }
-    let(:amount_in_cents) { 100 }
-    let(:result) { described_class.new(line_item: line_item, amount_in_cents: amount_in_cents).call }
+    let(:percentage) { 0.2 }
+    let(:result) { described_class.new(line_item: line_item, percentage: percentage).call }
     let(:create_adjustment_service_double) { double }
 
     before do
@@ -16,8 +16,8 @@ describe Adjustments::CreateTaxAdjustmentService do
     it "calls Adjustments::CreateAdjustmentService to create the adjustment" do
       result
       expect(Adjustments::CreateAdjustmentService).to have_received(:new).with(
-        adjustment_type: Adjustment::TAX_TYPE,
-        amount_in_cents: 100,
+        adjustment_type: Adjustment::FEE_TYPE,
+        amount_in_cents: line_item.base_adjustment.amount_in_cents * percentage,
         line_item: line_item
       )
       expect(create_adjustment_service_double).to have_received(:call)
@@ -28,7 +28,7 @@ describe Adjustments::CreateTaxAdjustmentService do
         result
         expect(Log.count).to eq(1)
         expect(Log.where(
-          action: 'Adjustments::CreateTaxAdjustmentService',
+          action: 'Adjustments::CreatePercentageFeeAdjustmentService',
           status: 'successful'
         ).first).to be_present
       end

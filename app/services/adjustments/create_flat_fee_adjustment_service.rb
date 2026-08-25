@@ -1,4 +1,4 @@
-class Adjustments::CreateTaxAdjustmentService
+class Adjustments::CreateFlatFeeAdjustmentService
   prepend ServiceMonitoring
 
   def initialize(line_item:, amount_in_cents:)
@@ -9,7 +9,7 @@ class Adjustments::CreateTaxAdjustmentService
   def call
     Adjustments::CreateAdjustmentService.new(
       line_item: @line_item,
-      adjustment_type: Adjustment::TAX_TYPE,
+      adjustment_type: Adjustment::FEE_TYPE,
       amount_in_cents: @amount_in_cents
     ).call
   end

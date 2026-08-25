@@ -67,5 +67,11 @@ FactoryBot.define do
       applied_transaction { association :applied_transaction, invoice: invoice }
       amount_in_cents { 1000 }
     end
+
+    # a supplementary fee for the line item
+    factory :fee_adjustment do
+      adjustment_type { Adjustment::FEE_TYPE }
+      amount_in_cents { 200 }
+    end
   end
 end

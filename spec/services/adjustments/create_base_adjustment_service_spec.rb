@@ -3,6 +3,7 @@ require "rails_helper"
 describe Adjustments::CreateBaseAdjustmentService do
   describe "#call" do
     let(:line_item) { FactoryBot.create(:line_item) }
+    let(:create_adjustment_service_double) { double }
 
     let(:result) do
       described_class.new(
@@ -10,23 +11,29 @@ describe Adjustments::CreateBaseAdjustmentService do
       ).call
     end
 
-    it "creates a base line item adjustment" do
+    before do
+      allow(Adjustments::CreateAdjustmentService).to receive(:new).and_return(create_adjustment_service_double)
+      allow(create_adjustment_service_double).to receive(:call)
+    end
+
+    it "calls Adjustments::CreateAdjustmentService to create the adjustment" do
       result
-      expect(Adjustment.count).to eq(1)
-      adjustment = Adjustment.first
-      expect(adjustment.invoice).to eq(line_item.invoice)
-      expect(adjustment.line_item).to eq(line_item)
-      expect(adjustment.adjustment_type).to eq(Adjustment::BASE_TYPE)
-      expect(adjustment.amount_in_cents).to eq(line_item.variant.amount_in_cents * line_item.quantity)
+      expect(Adjustments::CreateAdjustmentService).to have_received(:new).with(
+        adjustment_type: Adjustment::BASE_TYPE,
+        amount_in_cents: 1000,
+        line_item: line_item
+      )
+      expect(create_adjustment_service_double).to have_received(:call)
     end
 
     context "log creation" do
       it "creates a log for the service call" do
         result
         expect(Log.count).to eq(1)
-        log = Log.first
-        expect(log.action).to eq('Adjustments::CreateBaseAdjustmentService')
-        expect(log.status).to eq('successful')
+        expect(Log.where(
+          action: 'Adjustments::CreateBaseAdjustmentService',
+          status: 'successful'
+        ).first).to be_present
       end
     end
   end

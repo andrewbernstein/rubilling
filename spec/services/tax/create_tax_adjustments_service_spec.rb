@@ -1,6 +1,6 @@
 require "rails_helper"
 
-describe Adjustments::CreateTaxAdjustmentsService do
+describe Tax::CreateTaxAdjustmentsService do
   context "#call" do
     let(:result) { described_class.new(adjustment_info: adjustment_info).call }
     let(:adjustment_info) { [] }
