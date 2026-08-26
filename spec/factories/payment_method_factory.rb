@@ -10,5 +10,6 @@
 #
 FactoryBot.define do
   factory :payment_method do
+    entity
   end
 end

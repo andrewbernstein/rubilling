@@ -9,4 +9,5 @@
 #  entity_id         :bigint
 #
 class PaymentMethod < ApplicationRecord
+  belongs_to :entity
 end
