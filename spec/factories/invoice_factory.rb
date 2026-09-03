@@ -18,4 +18,11 @@ FactoryBot.define do
   factory :invoice do
     payee
   end
+
+  trait :with_line_item_with_base_adjustment do
+    after :create do |instance|
+      line_item = create(:line_item, :with_base_adjustment, invoice: instance)
+      instance.line_items << line_item
+    end
+  end
 end

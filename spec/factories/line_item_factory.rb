@@ -17,7 +17,9 @@ FactoryBot.define do
 
     trait :with_base_adjustment do
       after(:create) do |instance|
-        create(:base_adjustment, line_item: instance)
+        adjustment = create(:base_adjustment, line_item: instance)
+        instance.adjustments << adjustment
+        instance.invoice.adjustments << adjustment
       end
     end
   end

@@ -13,4 +13,15 @@
 #  parent_log_id :bigint
 #
 class Log < ApplicationRecord
+  ATTEMPTED = "attempted"
+  ERRORED = "errored"
+  FAILED_VALIDATION = "failed_validation"
+  SUCCESSFUL = "successful"
+
+  STATUSES = [
+    ATTEMPTED,
+    ERRORED,
+    FAILED_VALIDATION,
+    SUCCESSFUL
+  ]
 end

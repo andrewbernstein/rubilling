@@ -21,4 +21,8 @@ class LineItem < ApplicationRecord
   def base_adjustment
     adjustments.where(adjustment_type: Adjustment::BASE_TYPE).first
   end
+
+  def total
+    adjustments.sum(:amount_in_cents)
+  end
 end
