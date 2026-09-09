@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_18_030032) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_08_215137) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -21,6 +21,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_18_030032) do
     t.datetime "created_at", null: false
     t.bigint "invoice_id"
     t.bigint "line_item_id"
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "applied_promotions", force: :cascade do |t|
+    t.bigint "adjustment_id"
+    t.integer "amount_in_cents"
+    t.datetime "created_at", null: false
+    t.bigint "invoice_id"
+    t.bigint "line_item_id"
+    t.bigint "promotion_id"
     t.datetime "updated_at", null: false
   end
 
@@ -79,6 +89,18 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_18_030032) do
     t.datetime "created_at", null: false
     t.string "name"
     t.datetime "updated_at", null: false
+  end
+
+  create_table "promotions", force: :cascade do |t|
+    t.integer "amount_in_cents"
+    t.datetime "created_at", null: false
+    t.string "description"
+    t.datetime "end_at"
+    t.integer "percentage"
+    t.string "promotion_type"
+    t.datetime "start_at"
+    t.datetime "updated_at", null: false
+    t.bigint "variant_id"
   end
 
   create_table "transactions", force: :cascade do |t|

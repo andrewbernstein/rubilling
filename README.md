@@ -34,6 +34,7 @@ Analogous to the bill you receive at a restaraunt.
     - In the Restaraunt analogy, this is the Customer
 - An Invoice HAS MANY Payee Entities
     - In the Restaraunt analogy, this is the Restaraunt
+- An Invoice HAS MANY Applied Promotions
 
 ### Line Items
 Analogous to an individual item on the bill you receive at a restaraunt. The `amount_in_cents` of the Line Item's `BASE_PRICE` Adjustment is determined by its Variant's `amount_in_cents` multiplied by the Line Item's Quantity.
@@ -41,6 +42,7 @@ Analogous to an individual item on the bill you receive at a restaraunt. The `am
 - A Line Item BELONGS TO an Invoice
 - A Line Item HAS MANY Adjustments
 - A Line Item HAS ONE Variant
+- A Line Item HAS MANY Applied Promotions
 
 ### Adjustments
 A breakdown of the billing parts of each individual line item on an invoice, there isn't a great simple analogy.
@@ -53,11 +55,13 @@ A breakdown of the billing parts of each individual line item on an invoice, the
     - Author's note: most Adjustments won't belong to an Applied Transaction, but PAYMENT Adjustments will
 - An Adjustment BELONGS TO a Trasaction THROUGH an Applied Transaction
     - Author's note: similar to Applied Transactions, most adjustments won't belong to a Transaction
+- An Adjustment HAS MANY Applied Promotions
+- An Adjustment HAS MANY Promotions THROUGH Applied Promotions
 
 ### Transactions
 Charges on the bill you receive at a restaraunt.
 
-This is an internal representation of a payment received from a payor Entity (the Entity paying the Invoice) to a payee Entity (the Entity receiving the money). 
+This is an internal representation of a payment received from a payor Entity (the Entity paying the Invoice) to a payee Entity (the Entity receiving the money).
 
 - A Transaction HAS MANY Applied Transactions
 - A Transaction HAS MANY Invoices THROUGH Applied Transactions
@@ -67,7 +71,7 @@ This is an internal representation of a payment received from a payor Entity (th
 - A Transaction HAS ONE Payment Method
 
 ### Applied Transactions
-The link between a Transaction and an Invoice that lets you partially pay an Invoice, or (potentialy) pay multiple Invoices with a single Transaction. 
+The link between a Transaction and an Invoice that lets you partially pay an Invoice, or (potentialy) pay multiple Invoices with a single Transaction.
 
 If an invoice has been paid (partially or fully), it will have at least one Applied Transaction with a link to the Transaction representation of the payment.
 
@@ -98,7 +102,21 @@ The individual type of product that is billed for. Analogous to a veggie burger 
 - A Variant BELONGS TO a Product
 
 ### Payment Method
-The method an entity uses to pay for 
+The method an entity uses to pay for an invoice. Currently just a representation of a real payment method
+
+### Promotion
+A representation of a promo code that can be applied to Invoices. Promotions with a Variant can only be applied to invoices that have a line item with that variant. Promotions store the value of the discount (either a flat `amount_in_cents` or a percentage amount).
+
+- A Promotion HAS MANY Applied Promotions
+- A Promotion HAS ONE Variant
+
+### Applied Promotion
+Similar to an Applied Transaction, this model tracks the application of a Promotion to an Invoice (and Line Item) with the actual `amount_in_cents` calculated as applied.
+
+- An Applied Promotion BELONGS TO a Promotion
+- An Applied Promotion BELONGS TO a Adjustment
+- An Applied Promotion BELONGS TO a Line Item
+- An Applied Promotion BELONGS TO an Invoice
 
 ### Log
 Logs are not directly a billing object, but there should be a Log for each action (API call received, asynchronous job called, Service class called, etc.) performed by rubilling to be able to view a history of each call to allow us to validate that each call is performed properly and identify when and where issues occurred.
