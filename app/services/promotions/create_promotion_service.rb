@@ -26,11 +26,8 @@ class Promotions::CreatePromotionService
     )
     promotion.save!
 
-    result = ServiceResult.new
-    result[:promotion] = promotion
+    result = ServiceResult.new(promotion: promotion)
     result.success!
-
-    result
   end
 
   def validate_parameters
@@ -54,6 +51,5 @@ class Promotions::CreatePromotionService
     end
 
     result.success!
-    result
   end
 end

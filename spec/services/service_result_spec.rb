@@ -109,4 +109,32 @@ describe ServiceResult do
       end
     end
   end
+
+  describe "#method_missing" do
+    context "super behavior" do
+      it "still throws method not found" do
+        expect { result.notarealmethod }.to raise_error(NoMethodError)
+      end
+    end
+
+    context "when setting data" do
+      it "saves the value in results" do
+        result.foo = "bar"
+        expect(result.results[:foo]).to eq("bar")
+      end
+
+      it "saves false correctly" do
+        result.foo = false
+        expect(result.results[:foo]).to eq(false)
+        expect(result.foo).to eq(false)
+      end
+    end
+
+    context "when getting data" do
+      it "returns data from results" do
+        result.foo = "bar"
+        expect(result.foo).to eq("bar")
+      end
+    end
+  end
 end

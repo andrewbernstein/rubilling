@@ -13,6 +13,7 @@ class PaymentMethods::CreatePaymentMethodService
     )
     payment_method.save!
 
-    payment_method
+    result = ServiceResult.new(payment_method: payment_method)
+    result.success!
   end
 end

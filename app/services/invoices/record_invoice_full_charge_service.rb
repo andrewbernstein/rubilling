@@ -9,20 +9,16 @@ class Invoices::RecordInvoiceFullChargeService
   end
 
   def call
-    result = {
-      errors: [],
-      success: false
-    }
+    result = ServiceResult.new
 
     # validate that the invoice is in a chargeable state
     validation_result = Invoices::IsInvoiceChargeableService.new(
       invoice: @invoice,
       expect_no_taxes: @options[:expect_no_taxes] || false
     ).call
-    if validation_result[:errors].any?
+    if validation_result.failure?
       set_failed_validation_end_status
-      result[:errors] = validation_result[:errors]
-      return result
+      return validation_result
     end
 
     # for now, we're not supporting over- or under-payment of invoices
@@ -30,7 +26,7 @@ class Invoices::RecordInvoiceFullChargeService
     # (probably in a separate service as we may or may not have specific invoices to apply the payment to yet)
     if @amount_in_cents != @invoice.total
       set_failed_validation_end_status
-      result[:errors] << "amount in cents does not match invoice total"
+      result.error!("amount in cents does not match invoice total")
       return result
     end
 
@@ -58,7 +54,6 @@ class Invoices::RecordInvoiceFullChargeService
       end
     end
 
-    result[:success] = true
-    result
+    result.success!
   end
 end

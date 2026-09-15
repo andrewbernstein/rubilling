@@ -15,11 +15,12 @@ describe Invoices::IsInvoiceChargeableService do
       let(:invoice) { create(:invoice) }
 
       it "is not chargeable" do
-        expect(result[:chargeable?]).to be false
+        expect(result.success?).to be false
+        expect(result.chargeable).to be false
       end
 
       it "retuns an error for no line items" do
-        expect(result[:errors]).to include("no line items")
+        expect(result.errors).to include("no line items")
       end
 
       it "sets the log for the service call to validation failed" do
@@ -33,11 +34,12 @@ describe Invoices::IsInvoiceChargeableService do
 
     context "with no taxes" do
       it "is not chargeable" do
-        expect(result[:chargeable?]).to be false
+        expect(result.success?).to be false
+        expect(result.chargeable).to be false
       end
 
       it "retuns an error for no line items" do
-        expect(result[:errors]).to include("no taxes")
+        expect(result.errors).to include("no taxes")
       end
 
       it "sets the log for the service call to validation failed" do
@@ -51,12 +53,13 @@ describe Invoices::IsInvoiceChargeableService do
       context "if you expect no taxes" do
         let(:expect_no_taxes) { true }
 
-        it "is not chargeable" do
-          expect(result[:chargeable?]).to be true
+        it "is chargeable" do
+          expect(result.success?).to be true
+          expect(result.chargeable).to be true
         end
 
-        it "retuns an error for no taxes" do
-          expect(result[:errors]).not_to include("no taxes")
+        it "does not retun an error for no taxes" do
+          expect(result.errors).not_to include("no taxes")
         end
 
         it "sets the log for the service call to successful" do
@@ -78,11 +81,11 @@ describe Invoices::IsInvoiceChargeableService do
       end
 
       it "is chargeable" do
-        expect(result[:chargeable?]).to be true
+        expect(result.chargeable).to be true
       end
 
       it "has no errors" do
-        expect(result[:errors]).to eq([])
+        expect(result.errors).to eq([])
       end
 
       it "sets the log for the service call to successful" do
@@ -97,11 +100,11 @@ describe Invoices::IsInvoiceChargeableService do
         let(:expect_no_taxes) { true }
 
         it "is not chargeable" do
-          expect(result[:chargeable?]).to be false
+          expect(result.chargeable).to be false
         end
 
         it "retuns an error for has taxes" do
-          expect(result[:errors]).to include("has taxes")
+          expect(result.errors).to include("has taxes")
         end
 
         it "sets the log for the service call to validation failed" do
@@ -126,11 +129,11 @@ describe Invoices::IsInvoiceChargeableService do
       end
 
       it "is not chargeable" do
-        expect(result[:chargeable?]).to be false
+        expect(result.chargeable).to be false
       end
 
       it "retuns an error for already paid" do
-        expect(result[:errors]).to include("already paid")
+        expect(result.errors).to include("already paid")
       end
 
       it "sets the log for the service call to validation failed" do

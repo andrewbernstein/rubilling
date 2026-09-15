@@ -10,6 +10,8 @@ class Tax::CreateTaxAdjustmentsService
   end
 
   def call
+    result = ServiceResult.new
+
     @adjustment_info.each do |line_info|
       line_item = LineItem.find(line_info[:line_item_id])
       tax_adjustment_info = line_info[:tax_adjustment_info]
@@ -21,5 +23,7 @@ class Tax::CreateTaxAdjustmentsService
         ).call
       end
     end
+
+    result.success!
   end
 end

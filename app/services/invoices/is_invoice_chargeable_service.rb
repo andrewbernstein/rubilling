@@ -12,18 +12,21 @@ class Invoices::IsInvoiceChargeableService
   end
 
   def call
-    errors = []
-    errors << "no line items" unless @invoice.line_items.any?
-    errors << "already paid" if @invoice.paid?
-    errors << "no taxes" if tax_adjustments.none? && !@expect_no_taxes
-    errors << "has taxes" if tax_adjustments.any? && @expect_no_taxes
+    result = ServiceResult.new
+    result.error!("no line items") unless @invoice.line_items.any?
+    result.error!("already paid") if @invoice.paid?
+    result.error!("no taxes") if tax_adjustments.none? && !@expect_no_taxes
+    result.error!("has taxes") if tax_adjustments.any? && @expect_no_taxes
 
-    set_failed_validation_end_status if errors.any?
+    if result.failure?
+      result.chargeable = false
+      set_failed_validation_end_status
+    else
+      result.chargeable = true
+      result.success!
+    end
 
-    {
-      chargeable?: errors.none?,
-      errors: errors
-    }
+    result
   end
 
   def tax_adjustments

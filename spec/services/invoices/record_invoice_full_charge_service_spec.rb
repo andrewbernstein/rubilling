@@ -6,7 +6,7 @@ describe Invoices::RecordInvoiceFullChargeService do
   let(:amount_in_cents) { 1000 }
   let(:options) { { expect_no_taxes: true } }
   let(:is_invoice_chargeable_service_double) { double }
-  let(:is_invoice_chargeable_service_result) { { errors: [], chargeable?: true } }
+  let(:is_invoice_chargeable_service_result) { ServiceResult.new(chargeable: true) }
   let(:result) do
     described_class.new(
       invoice: invoice,
@@ -34,10 +34,14 @@ describe Invoices::RecordInvoiceFullChargeService do
       end
 
       context "when an invoice is not chargeable" do
-        let(:is_invoice_chargeable_service_result) { { errors: [ "totally a real error" ], chargeable?: false } }
+        let(:is_invoice_chargeable_service_result) do
+          result = ServiceResult.new(chargeable: false)
+          result.error!("totally a real error")
+        end
 
         it "returns the error" do
-          expect(result).to eq({ errors: [ "totally a real error" ], success: false })
+          expect(result.success?).to eq(false)
+          expect(result.errors).to eq([ "totally a real error" ])
         end
 
         it "does not record a charge" do
@@ -63,7 +67,8 @@ describe Invoices::RecordInvoiceFullChargeService do
           let(:amount_in_cents) { 1100 }
 
           it "returns an error" do
-            expect(result).to eq({ errors: [ "amount in cents does not match invoice total" ], success: false })
+            expect(result.success?).to eq(false)
+            expect(result.errors).to eq([ "amount in cents does not match invoice total" ])
           end
 
           it "does not record a charge" do
@@ -88,7 +93,8 @@ describe Invoices::RecordInvoiceFullChargeService do
           let(:amount_in_cents) { 900 }
 
           it "returns an error" do
-            expect(result).to eq({ errors: [ "amount in cents does not match invoice total" ], success: false })
+            expect(result.success?).to eq(false)
+            expect(result.errors).to eq([ "amount in cents does not match invoice total" ])
           end
 
           it "does not record a charge" do
@@ -114,7 +120,8 @@ describe Invoices::RecordInvoiceFullChargeService do
     context "recording charges" do
       context "with one line item" do
         it "returns success" do
-          expect(result).to eq({ errors: [], success: true })
+          expect(result.success?).to eq(true)
+          expect(result.errors).to eq([])
         end
 
         it "creates a Transaction" do
@@ -168,7 +175,8 @@ describe Invoices::RecordInvoiceFullChargeService do
         end
 
         it "returns success" do
-          expect(result).to eq({ errors: [], success: true })
+          expect(result.success?).to eq(true)
+          expect(result.errors).to eq([])
         end
 
         it "creates a Transaction" do

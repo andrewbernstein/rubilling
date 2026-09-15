@@ -18,6 +18,7 @@ class Adjustments::CreateAdjustmentService
     )
     adjustment.save!
 
-    adjustment
+   result = ServiceResult.new(adjustment: adjustment)
+   result.success!
   end
 end

@@ -15,6 +15,7 @@ class Invoices::CreateInvoiceService
     )
     invoice.save!
 
-    invoice
+    result = ServiceResult.new(invoice: invoice)
+    result.success!
   end
 end
