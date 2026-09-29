@@ -9,6 +9,6 @@
 #
 FactoryBot.define do
   factory :category do
-    
+    # not implemented yet
   end
 end
