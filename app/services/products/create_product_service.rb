@@ -1,17 +1,25 @@
 class Products::CreateProductService
-  include ServiceMonitoring
+  prepend ServiceMonitoring
 
-  def initialize(name:)
+  def initialize(name:, category: nil)
     @name = name
+    @category = category
   end
 
   def call
     result = ServiceResult.new
 
     product = Product.new(name: @name)
-    product.save!
+    product.category = @category if @category.present?
 
-    result.product = product
-    result.success!
+    product.save
+    if product.errors.present?
+      product.errors.each { |error| result.error!(error.full_message) }
+      set_failed_validation_end_status
+      result
+    else
+      result.product = product
+      result.success!
+    end
   end
 end

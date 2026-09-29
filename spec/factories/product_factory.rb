@@ -8,8 +8,12 @@
 #  updated_at  :datetime         not null
 #  category_id :bigint
 #
+# Indexes
+#
+#  index_products_on_name  (name) UNIQUE
+#
 FactoryBot.define do
   factory :product do
-    name { "test product" }
+    name { |n| "test product#{n}" }
   end
 end

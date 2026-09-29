@@ -11,5 +11,9 @@ require "rails_helper"
 #  updated_at      :datetime         not null
 #  product_id      :bigint
 #
+# Indexes
+#
+#  index_variants_on_name  (name) UNIQUE
+#
 describe Variant do
 end

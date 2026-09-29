@@ -10,5 +10,9 @@ require "rails_helper"
 #  updated_at  :datetime         not null
 #  category_id :bigint
 #
+# Indexes
+#
+#  index_products_on_name  (name) UNIQUE
+#
 describe Product do
 end
