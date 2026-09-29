@@ -13,6 +13,8 @@ require 'rails_helper'
 #  start_at        :datetime
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  category_id     :bigint
+#  product_id      :bigint
 #  variant_id      :bigint
 #
 RSpec.describe Promotion, type: :model do
