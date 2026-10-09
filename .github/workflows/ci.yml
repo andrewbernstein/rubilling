@@ -7,7 +7,7 @@ on:
 
 jobs:
   scan_ruby:
-    runs-on: ubuntu-26.04
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
@@ -25,7 +25,7 @@ jobs:
         run: bin/bundler-audit
 
   lint:
-    runs-on: ubuntu-26.04
+    runs-on: ubuntu-latest
     env:
       RUBOCOP_CACHE_ROOT: tmp/rubocop
     steps:
@@ -51,7 +51,7 @@ jobs:
         run: bin/rubocop -f github
 
   test:
-    runs-on: ubuntu-26.04
+    runs-on: ubuntu-latest
 
     # services:
     services:
@@ -101,7 +101,7 @@ jobs:
         run: bin/rails db:create db:migrate test
 
 #  system-test:
-#    runs-on: ubuntu-26.04
+#    runs-on: ubuntu-latest
 #
 #    services:
 #      # Label used to access the service container
